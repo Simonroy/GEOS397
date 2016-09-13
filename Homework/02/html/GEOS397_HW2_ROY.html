@@ -1,0 +1,554 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>GEOS397_HW2_ROY</title><meta name="generator" content="MATLAB 8.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-09-07"><meta name="DC.source" content="GEOS397_HW2_ROY.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1"><b>Homework #2</b></a></li><li><a href="#2"><b>Problem #1</b></a></li><li><a href="#3"><b>A</b></a></li><li><a href="#4"><b>B</b></a></li><li><a href="#5"><b>C</b></a></li><li><a href="#6"><b>Problem #2</b></a></li><li><a href="#7"><b>A</b></a></li><li><a href="#8"><b>B</b></a></li><li><a href="#9"><b>C</b></a></li><li><a href="#10"><b>D</b></a></li><li><a href="#11"><b>E</b></a></li><li><a href="#12"><b>F</b></a></li><li><a href="#13"><b>G</b></a></li><li><a href="#14"><b>H</b></a></li><li><a href="#15"><b>I</b></a></li><li><a href="#16"><b>J</b></a></li><li><a href="#17"><b>K</b></a></li><li><a href="#18"><b>Problem #3</b></a></li><li><a href="#19"><b>A</b></a></li><li><a href="#20"><b>B</b></a></li><li><a href="#21"><b>C</b></a></li><li><a href="#22"><b>D</b></a></li><li><a href="#23"><b>E</b></a></li><li><a href="#24"><b>F</b></a></li></ul></div><h2><b>Homework #2</b><a name="1"></a></h2><p><i>Simon Roy</i></p><pre class="codeinput">clc
+</pre><h2><b>Problem #1</b><a name="2"></a></h2><h2><b>A</b><a name="3"></a></h2><p>This problem asks us to create a variable called <i>time</i> using the <b>clock</b> function, and answer a couple of questions.</p><p>First I will set a variable called <i>time</i> equal to the function <b>clock</b></p><pre class="codeinput">time = clock
+<span class="comment">%</span>
+<span class="comment">% Then I use the *size* function to get the dimensions of the array</span>
+<span class="comment">%</span>
+dimensions = size(time)
+<span class="comment">%</span>
+<span class="comment">% The command window and workspace show that _time_ is a *1x6* *row vector* with *double</span>
+<span class="comment">% precision floating point* numbers, arranged from left to right as a</span>
+<span class="comment">% constant (1e+03) multiplied by [year,month,day,hour,minute,second]</span>
+<span class="comment">% This information is pulled from the computer's operating system at the</span>
+<span class="comment">% time the code is executed.</span>
+<span class="comment">%</span>
+</pre><pre class="codeoutput">
+time =
+
+   1.0e+03 *
+
+    2.0160    0.0090    0.0070         0    0.0210    0.0145
+
+
+dimensions =
+
+     1     6
+
+</pre><h2><b>B</b><a name="4"></a></h2><p>This part asks for a variable called yearString that is only the year using datestr.</p><pre class="codeinput">yearString = datestr(now,<span class="string">'yyyy'</span>)
+<span class="comment">%</span>
+<span class="comment">% This saves the current year to the workspace, as a string variable named</span>
+<span class="comment">% yearString</span>
+<span class="comment">%</span>
+</pre><pre class="codeoutput">
+yearString =
+
+2016
+
+</pre><h2><b>C</b><a name="5"></a></h2><p>Part C asks us to save the variables we created in a .mat file</p><pre class="codeinput">saveFile = <span class="string">'datearrayandyearstring.mat'</span>;
+save(saveFile, <span class="string">'time'</span>,<span class="string">'yearString'</span>)
+<span class="comment">%</span>
+<span class="comment">% This set of commands saves the two variables to the indicated file. The</span>
+<span class="comment">% file gets saved in the current folder and in the workspace.</span>
+<span class="comment">%</span>
+<span class="comment">% To test the functionality, I will now clear the two variables from the</span>
+<span class="comment">% workspace, and reload them from the .mat file</span>
+<span class="comment">%</span>
+clear <span class="string">time</span>
+clear <span class="string">yearString</span>
+load(<span class="string">'datearrayandyearstring'</span>)
+<span class="comment">%</span>
+<span class="comment">% We can see the two variables loaded into the workspace. *Note:* The time</span>
+<span class="comment">% variable now contains the current time when the file was reloaded into</span>
+<span class="comment">% the workspace, making this a very useful function to apply a timestamp to</span>
+<span class="comment">% various steps in a project.</span>
+<span class="comment">%</span>
+</pre><h2><b>Problem #2</b><a name="6"></a></h2><p>In this problem we will practice graphing sine and cosine functions.</p><h2><b>A</b><a name="7"></a></h2><p>Create a vector called <i>tArray</i> using <b>linspace</b></p><pre class="codeinput">tMin = 0;
+tMax = 1;
+tArray = linspace(tMin,tMax,1001);
+<span class="comment">%</span>
+<span class="comment">% This creates a time array with 1001 elements, which gives 1000 intervals.</span>
+<span class="comment">% *Each interval is 0.001 seconds</span>
+
+sampleInterval = (1-0)/1000
+</pre><pre class="codeoutput">
+sampleInterval =
+
+   1.0000e-03
+
+</pre><h2><b>B</b><a name="8"></a></h2><p>Make a variable for frequency <i>f</i>, set equal to 5 Hertz</p><pre class="codeinput">f = 5
+</pre><pre class="codeoutput">
+f =
+
+     5
+
+</pre><h2><b>C</b><a name="9"></a></h2><p>We convert f to angular frequency by multiplying by 2*pi This will be angular frequency <i>w</i></p><pre class="codeinput">w = 2*f*pi()
+</pre><pre class="codeoutput">
+w =
+
+   31.4159
+
+</pre><h2><b>D</b><a name="10"></a></h2><p>Now I will save values for the cosine and sine functions, with frequency <i>f</i>, from 0 to 1 seconds. Each value will be stored as an array with 1001 elements to be matched with the <i>tArray</i> for plotting</p><pre class="codeinput">cosineValues = cos(w*tArray);
+
+sineValues = sin(w*tArray);
+</pre><h2><b>E</b><a name="11"></a></h2><p>Now I have the values to plot the functions. Note that <i>f</i> has units of inverse seconds, <i>tArray</i> has units of seconds, so the argument of the functions are unitless, as expected.</p><p>These commands make a nice labeled plot of the two functions on the specified interval</p><pre class="codeinput">plot(tArray,cosineValues,<span class="string">'r-'</span>,tArray,sineValues,<span class="string">'b--'</span>)
+xlabel(<span class="string">'Time in seconds'</span>)
+ylabel(<span class="string">'Function Value'</span>)
+title(<span class="string">'Graphs of Sine and Cosine from t=0 to t=1 at f = 5 Hz'</span>)
+<span class="comment">%</span>
+<span class="comment">% The hold command will ensure that our next changes will be added to the</span>
+<span class="comment">% current plot</span>
+<span class="comment">%</span>
+hold <span class="string">on</span>
+</pre><img vspace="5" hspace="5" src="GEOS397_HW2_ROY_01.png" alt=""> <h2><b>F</b><a name="12"></a></h2><p>Next we will add a legend, These commands will turn on the legend, label the lines, and place the legend outside the figure in the upper right corner</p><pre class="codeinput">legend <span class="string">toggle</span>
+legend(<span class="string">'Cosine'</span>,<span class="string">'Sine'</span>,<span class="string">'Location'</span>,<span class="string">'NorthEastOutside'</span>)
+</pre><img vspace="5" hspace="5" src="GEOS397_HW2_ROY_02.png" alt=""> <h2><b>G</b><a name="13"></a></h2><p>This command will set the x axis to go from 0 to 1, while the y axis will go from -1.5 to 1.5. This will make the plot easier to see</p><pre class="codeinput">axis([tMin,tMax,-1.5,1.5])
+</pre><img vspace="5" hspace="5" src="GEOS397_HW2_ROY_03.png" alt=""> <h2><b>H</b><a name="14"></a></h2><p>Now I'll turn on the grid using <b>grid</b></p><pre class="codeinput">grid <span class="string">on</span>
+</pre><img vspace="5" hspace="5" src="GEOS397_HW2_ROY_04.png" alt=""> <h2><b>I</b><a name="15"></a></h2><p>This plot is the required plot. The cosine function starts at a value of 1 for t=0 and reaches that value exactly 5 times in one second, which is what we expect for 5 Hz. The sine function is increasing from 0 at t=0, and comes to this place in the cycle exactly 5 times in the one second interval. The two curves are identical, aside from a pi/2 phase shift.</p><h2><b>J</b><a name="16"></a></h2><p>The amplitude of the wave(s) is 1</p><h2><b>K</b><a name="17"></a></h2><p>I could change the amplitude to anything I want by multiplying either function by the desired amplitude. For some constant A, the form would be A*cosine(w*t), where A is the desired amplitude</p><pre class="codeinput">hold <span class="string">off</span>
+</pre><h2><b>Problem #3</b><a name="18"></a></h2><p>In this problem we will model the growth of a rabbit population.</p><h2><b>A</b><a name="19"></a></h2><p>First we'll set the initial number of rabbits, <i>initialRabbits</i> to two, and the time step <i>dt</i> equal to 1</p><pre class="codeinput">initialRabbits = 2;
+dt = 1;
+<span class="comment">%</span>
+</pre><h2><b>B</b><a name="20"></a></h2><p>Create a variable for maximum number of gestation periods <i>cycles</i>, and a growth rate variable <i>b</i> between 0 and 1</p><pre class="codeinput">cycles = 10;
+
+b = 0.9;
+<span class="comment">%</span>
+</pre><h2><b>C</b><a name="21"></a></h2><p>Now we need a while loop to run through the gestation cycles. I'll set <i>rNow</i> to the initial number of rabbits. I will also make a variable called <i>cycleNumber</i> set equal to 0. Then inside the loop I will add <i>rNow</i> and <i>cycleNumber</i> to appropriate empty arrays. Then I'll add the growth rate <i>b</i> multiplied by the time step <i>dt</i> multiplied by <i>rNow</i> to the old value of <i>rNow</i> and call it <i>rNew</i>. Then set <i>rNow</i> equal to <i>rNew</i> and <i>cycleNumber</i> equal to <i>cycleNumber</i> + 1. The loop will populate the empty arrays with values for the number of rabbits and the number of the gestation cycle for each iteration in theloop.</p><pre class="codeinput">rNow = initialRabbits;
+cycleNumber = 0;
+rabbitCountArray = [];
+cycleNumberArray = [];
+
+<span class="keyword">while</span> cycleNumber &lt;= cycles;
+    cycleNumberArray = [cycleNumberArray,cycleNumber];
+    rabbitCountArray = [rabbitCountArray,rNow];
+    rNew = rNow + b*rNow*dt;
+    cycleNumber = cycleNumber + 1;
+    rNow = rNew;
+<span class="keyword">end</span>
+cycleNumberArray
+rabbitCountArray
+<span class="comment">%</span>
+</pre><pre class="codeoutput">
+cycleNumberArray =
+
+     0     1     2     3     4     5     6     7     8     9    10
+
+
+rabbitCountArray =
+
+   1.0e+03 *
+
+  Columns 1 through 7
+
+    0.0020    0.0038    0.0072    0.0137    0.0261    0.0495    0.0941
+
+  Columns 8 through 11
+
+    0.1788    0.3397    0.6454    1.2262
+
+</pre><h2><b>D</b><a name="22"></a></h2><p>Now that we have the data points, it's time to make a plot. I will use <b>subplot</b> to plot the population, as well as the base ten log of the rabbit population. Also, I will turn on the <b>grid</b>, label the axes, and give each subplot a title.</p><pre class="codeinput">subplot(1,2,1), plot(cycleNumberArray,rabbitCountArray)
+xlabel(<span class="string">'Gestation Cycles'</span>)
+ylabel(<span class="string">'Approximate Number of Rabbits'</span>)
+grid <span class="string">on</span>
+
+<span class="comment">% Right hand side</span>
+
+title(<span class="string">'Rabbit Population with b = 0.9'</span> )
+subplot(1,2,2), plot(cycleNumberArray,log10(rabbitCountArray))
+xlabel(<span class="string">'Gestation Cycles'</span>)
+ylabel(<span class="string">'log10(Number of Rabbits)'</span>)
+grid <span class="string">on</span>
+title(<span class="string">'Log(base 10) of Rabbit Population (b = 0.9)'</span>)
+</pre><img vspace="5" hspace="5" src="GEOS397_HW2_ROY_05.png" alt=""> <h2><b>E</b><a name="23"></a></h2><p>For this step I varied the growth rate. I did not include all the plots here, but I varied the growth rate <i>b</i> between 0.1 and 0.9. A sample of the plots is below:</p><p><b>For small growth rates like 0.1, the population doesn't climb very quickly, but the graph of the log is still a straight line, indicating exponential growth. As the rate increases, the population increases very quickly, with the curve of the exponential becoming more pronounced, and the straight line on the log graph having a steeper slope. Here are a few samples: (To create these I ran my script several times with the savefig command, and then used openfig below to add each one to this document.)</b></p><pre class="codeinput">openfig(<span class="string">'growth0_1fig'</span>)
+openfig(<span class="string">'growth0_3fig'</span>)
+openfig(<span class="string">'growth0_5fig'</span>)
+openfig(<span class="string">'growth0_7fig'</span>)
+openfig(<span class="string">'growth0_9fig'</span>)
+</pre><pre class="codeoutput">
+ans = 
+
+  Figure (1) with properties:
+
+      Number: 1
+        Name: ''
+       Color: [0.9400 0.9400 0.9400]
+    Position: [360 271 560 420]
+       Units: 'pixels'
+
+  Use GET to show all properties
+
+
+ans = 
+
+  Figure (2) with properties:
+
+      Number: 2
+        Name: ''
+       Color: [0.9400 0.9400 0.9400]
+    Position: [360 271 560 420]
+       Units: 'pixels'
+
+  Use GET to show all properties
+
+
+ans = 
+
+  Figure (3) with properties:
+
+      Number: 3
+        Name: ''
+       Color: [0.9400 0.9400 0.9400]
+    Position: [31 271 560 420]
+       Units: 'pixels'
+
+  Use GET to show all properties
+
+
+ans = 
+
+  Figure (4) with properties:
+
+      Number: 4
+        Name: ''
+       Color: [0.9400 0.9400 0.9400]
+    Position: [93 271 560 420]
+       Units: 'pixels'
+
+  Use GET to show all properties
+
+
+ans = 
+
+  Figure (5) with properties:
+
+      Number: 5
+        Name: ''
+       Color: [0.9400 0.9400 0.9400]
+    Position: [93 271 560 420]
+       Units: 'pixels'
+
+  Use GET to show all properties
+
+</pre><img vspace="5" hspace="5" src="GEOS397_HW2_ROY_06.png" alt=""> <img vspace="5" hspace="5" src="GEOS397_HW2_ROY_07.png" alt=""> <img vspace="5" hspace="5" src="GEOS397_HW2_ROY_08.png" alt=""> <img vspace="5" hspace="5" src="GEOS397_HW2_ROY_09.png" alt=""> <img vspace="5" hspace="5" src="GEOS397_HW2_ROY_10.png" alt=""> <h2><b>F</b><a name="24"></a></h2><p><b>The gestation period for rabbits is around 28-31 days, according to reference.com (https://www.reference.com/pets-animals/gestation-period-rabbit-e07e56ef01f52d9c) Several other sources give similar average gestation periods. If we say that it's approximately one month, and there are 12 months in a calander year, we can say there are approximately <i>12 gestation periods</i> in a year. Plugging in 12 for <i>cycles</i> and 1 for <i>b</i>, we get a plot that looks like this:</b> <i>Total rabbit population after 12 gestation periods: 8192</i></p><pre class="codeinput">openfig(<span class="string">'growth1cycle12fig'</span>)
+</pre><pre class="codeoutput">
+ans = 
+
+  Figure (6) with properties:
+
+      Number: 6
+        Name: ''
+       Color: [0.9400 0.9400 0.9400]
+    Position: [93 271 560 420]
+       Units: 'pixels'
+
+  Use GET to show all properties
+
+</pre><img vspace="5" hspace="5" src="GEOS397_HW2_ROY_11.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% *Homework #2*
+% _Simon Roy_
+clc 
+%% *Problem #1*
+%
+%%   *A*
+%
+% This problem asks us to create a variable called _time_ using the *clock*
+% function, and answer a couple of questions.
+% 
+%
+% First I will set a variable called _time_ equal to the function *clock*
+time = clock
+%
+% Then I use the *size* function to get the dimensions of the array
+%
+dimensions = size(time)
+%
+% The command window and workspace show that _time_ is a *1x6* *row vector* with *double
+% precision floating point* numbers, arranged from left to right as a
+% constant (1e+03) multiplied by [year,month,day,hour,minute,second]
+% This information is pulled from the computer's operating system at the
+% time the code is executed. 
+% 
+%%  *B*
+%
+% This part asks for a variable called yearString that is only the year
+% using datestr.
+%
+yearString = datestr(now,'yyyy')
+%
+% This saves the current year to the workspace, as a string variable named
+% yearString
+% 
+%%  *C*
+%
+% Part C asks us to save the variables we created in a .mat file
+% 
+saveFile = 'datearrayandyearstring.mat';
+save(saveFile, 'time','yearString')
+% 
+% This set of commands saves the two variables to the indicated file. The
+% file gets saved in the current folder and in the workspace.
+%
+% To test the functionality, I will now clear the two variables from the
+% workspace, and reload them from the .mat file
+%
+clear time
+clear yearString
+load('datearrayandyearstring')
+%
+% We can see the two variables loaded into the workspace. *Note:* The time
+% variable now contains the current time when the file was reloaded into
+% the workspace, making this a very useful function to apply a timestamp to
+% various steps in a project.
+%
+%% *Problem #2*
+% In this problem we will practice graphing sine and cosine functions. 
+%% *A* 
+% Create a vector called _tArray_ using *linspace*
+% 
+% 
+tMin = 0;
+tMax = 1;
+tArray = linspace(tMin,tMax,1001);
+% 
+% This creates a time array with 1001 elements, which gives 1000 intervals.
+% *Each interval is 0.001 seconds
+
+sampleInterval = (1-0)/1000
+
+%% *B*
+% Make a variable for frequency _f_, set equal to 5 Hertz
+
+f = 5
+
+%% *C*
+%
+% We convert f to angular frequency by multiplying by 2*pi
+% This will be angular frequency _w_
+
+w = 2*f*pi()
+
+%% *D*
+% 
+% Now I will save values for the cosine and sine functions, with frequency
+% _f_, from 0 to 1 seconds. Each value will be stored as an array with 1001
+% elements to be matched with the _tArray_ for plotting
+
+cosineValues = cos(w*tArray);
+
+sineValues = sin(w*tArray);
+
+%% *E* 
+%
+% Now I have the values to plot the functions. Note that _f_ has units of
+% inverse seconds, _tArray_ has units of seconds, so the argument of the
+% functions are unitless, as expected.
+%
+% These commands make a nice labeled plot of the two functions on the
+% specified interval
+%
+plot(tArray,cosineValues,'r-',tArray,sineValues,'bREPLACE_WITH_DASH_DASH')
+xlabel('Time in seconds')
+ylabel('Function Value')
+title('Graphs of Sine and Cosine from t=0 to t=1 at f = 5 Hz')
+%
+% The hold command will ensure that our next changes will be added to the
+% current plot
+%
+hold on
+
+%% *F*
+%
+% Next we will add a legend, 
+% These commands will turn on the legend, label the lines, and place the legend outside the
+% figure in the upper right corner
+
+legend toggle
+legend('Cosine','Sine','Location','NorthEastOutside')
+
+%% *G*
+%
+% This command will set the x axis to go from 0 to 1, while the y axis will
+% go from -1.5 to 1.5. This will make the plot easier to see
+
+axis([tMin,tMax,-1.5,1.5])
+
+
+%% *H*
+% Now I'll turn on the grid using *grid*
+
+grid on
+
+%% *I*
+%
+% This plot is the required plot. The cosine function starts at a value of
+% 1 for t=0 and reaches that value exactly 5 times in one second, which is
+% what we expect for 5 Hz. The sine function is increasing from 0 at t=0,
+% and comes to this place in the cycle exactly 5 times in the one second
+% interval. The two curves are identical, aside from a pi/2 phase shift.
+
+%% *J*
+%
+% The amplitude of the wave(s) is 1
+
+%% *K*
+%
+% I could change the amplitude to anything I want by multiplying either
+% function by the desired amplitude.
+% For some constant A, the form would be A*cosine(w*t), where A is the
+% desired amplitude
+hold off
+%% *Problem #3*
+%
+% In this problem we will model the growth of a rabbit population.
+%% *A*
+%
+% First we'll set the initial number of rabbits, _initialRabbits_ to two, and the time step
+% _dt_ equal to 1
+%
+initialRabbits = 2;
+dt = 1;
+%
+%% *B*
+%
+% Create a variable for maximum number of gestation periods _cycles_, and a growth
+% rate variable _b_ between 0 and 1
+%
+cycles = 10;
+
+b = 0.9;
+%
+%% *C*
+% 
+% Now we need a while loop to run through the gestation cycles. I'll set
+% _rNow_ to the initial number of rabbits. I will also make a variable called
+% _cycleNumber_ set equal to 0. Then inside the loop I will add _rNow_ and
+% _cycleNumber_ to appropriate empty arrays. Then I'll add the growth rate 
+% _b_ multiplied by the time step _dt_ multiplied by _rNow_ to the old value of
+% _rNow_ and call it _rNew_. Then set _rNow_ equal to _rNew_ and _cycleNumber_ 
+% equal to _cycleNumber_ + 1. The loop will populate the empty arrays with 
+% values for the number of rabbits and the number of the gestation cycle 
+% for each iteration in theloop. 
+%
+rNow = initialRabbits;
+cycleNumber = 0;
+rabbitCountArray = [];
+cycleNumberArray = [];
+
+while cycleNumber <= cycles;
+    cycleNumberArray = [cycleNumberArray,cycleNumber];
+    rabbitCountArray = [rabbitCountArray,rNow];
+    rNew = rNow + b*rNow*dt;
+    cycleNumber = cycleNumber + 1;
+    rNow = rNew;
+end
+cycleNumberArray
+rabbitCountArray
+%
+%% *D*
+% 
+% Now that we have the data points, it's time to make a plot. I will use
+% *subplot* to plot the population, as well as the base ten log of the
+% rabbit population. Also, I will turn on the *grid*, label the axes, and
+% give each subplot a title.
+
+subplot(1,2,1), plot(cycleNumberArray,rabbitCountArray)
+xlabel('Gestation Cycles')
+ylabel('Approximate Number of Rabbits')
+grid on
+
+% Right hand side
+
+title('Rabbit Population with b = 0.9' )
+subplot(1,2,2), plot(cycleNumberArray,log10(rabbitCountArray))
+xlabel('Gestation Cycles')
+ylabel('log10(Number of Rabbits)')
+grid on
+title('Log(base 10) of Rabbit Population (b = 0.9)')
+
+%% *E* 
+%
+% For this step I varied the growth rate. I did not include all the plots
+% here, but I varied the growth rate _b_ between 0.1 and 0.9. A sample of
+% the plots is below:
+%
+% *For small growth rates like 0.1, the population doesn't climb very
+% quickly, but the graph of the log is still a straight line, indicating
+% exponential growth. As the rate increases, the population increases very
+% quickly, with the curve of the exponential becoming more pronounced, and
+% the straight line on the log graph having a steeper slope. Here are a few
+% samples: (To create these I ran my script several times with the savefig command, and 
+% then used openfig below to add each one to this document.)*
+
+openfig('growth0_1fig')
+openfig('growth0_3fig')
+openfig('growth0_5fig')
+openfig('growth0_7fig')
+openfig('growth0_9fig')
+
+%% *F*
+% *The gestation period for rabbits is around 28-31 days, according to reference.com 
+% (https://www.reference.com/pets-animals/gestation-period-rabbit-e07e56ef01f52d9c)
+% Several other sources give similar average gestation periods.
+% If we say that it's approximately one month, and there are 12 months in a
+% calander year, we can say there are approximately _12 gestation periods_ in
+% a year. Plugging in 12 for _cycles_ and 1 for _b_, we get a plot that looks like this:*
+% _Total rabbit population after 12 gestation periods: 8192_
+openfig('growth1cycle12fig')
+##### SOURCE END #####
+--></body></html>
